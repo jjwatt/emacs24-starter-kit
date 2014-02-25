@@ -28,4 +28,7 @@
 (depends-on "markdown-mode")
 (depends-on "smartparens")
 (depends-on "solarized-theme")
-(depends-on "js-comint-mode")
+(depends-on "js-comint")
+(depends-on "skewer-mode")
+(depends-on "geiser")
+(depends-on "dropdown-list")

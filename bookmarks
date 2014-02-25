@@ -1,0 +1,45 @@
+;;;; Emacs Bookmark Format Version 1 ;;;;
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("saybrook"
+ (filename . "~/org/ps/saybrook_data.org")
+ (front-context-string . "\n* Notes\n** Sayb")
+ (rear-context-string . "SUM %CLOCKSUM_T\n")
+ (position . 363))
+("@work"
+ (filename . "~/org/@work.org")
+ (front-context-string . "\n** DONE Look in")
+ (rear-context-string . "er\n* @WorkCoding")
+ (position . 442))
+("conf-js"
+ (filename . "~/.emacs.d/wattenbarger.org")
+ (front-context-string . "\n#+BEGIN_SRC ema")
+ (rear-context-string . "C\n\n** Javascript")
+ (position . 4552))
+("conf"
+ (filename . "~/.emacs.d/wattenbarger.org")
+ (front-context-string . "\n* Trying this o")
+ (rear-context-string . "2 num:nil ^:nil\n")
+ (position . 75))
+("n"
+ (filename . "~/org/inbox.org")
+ (front-context-string . "\n** Use Make ins")
+ (rear-context-string . "KSUM_T\n\n* Inbox\n")
+ (position . 357))
+("Node Modules"
+ (filename . "~/src/node/doc/api/modules.markdown")
+ (front-context-string . "\n    exports.cir")
+ (rear-context-string . "* r * r;\n    };\n")
+ (position . 518))
+("org-refile-last-stored"
+ (filename . "~/org/someday-work.org")
+ (front-context-string . "** NEXT Review c")
+ (rear-context-string . " stuff in root)\n")
+ (position . 813))
+("org-capture-last-stored"
+ (filename . "~/org/notes.org")
+ (front-context-string . "* TODO Mess with")
+ (rear-context-string . "f?referrer=4052\n")
+ (position . 7903))
+)
