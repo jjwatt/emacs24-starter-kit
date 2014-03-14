@@ -192,8 +192,11 @@ Use =C-c-v-t= to tangle code blocks.
 *** TODO Automatically add anything under subs to the load path
 *** But, for now
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/subs/pretty-symbols"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/subs/slime"))
+  ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/subs/pretty-symbols"))
+  ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/subs/slime"))
+  ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/subs/emux"))
+  (let ((default-directory "~/.emacs.d/subs/"))
+    (normal-top-level-add-subdirs-to-load-path))
 #+END_SRC
 ** Add Theme Directories
 #+BEGIN_SRC emacs-lisp
@@ -272,7 +275,7 @@ No time to fix it now.
 ;; (add-hook 'js-mode-hook 'moz-minor-mode)
 ;; (add-hook 'js2-mode-hook 'turn-on-paredit)
 (add-hook 'js2-mode-hook 'run-starter-kit-coding-hook)
-(add-hook 'js-mode-hook 'idle-highlight)
+;; (add-hook 'js-mode-hook 'idle-highlight)
 (add-hook 'js2-mode-hook '(lambda()
                             ;; (pretty-symbols-mode)
                             (abbrev-mode)
@@ -693,6 +696,8 @@ emacs24-starter-kit joint.
                                     (org . t)
                                     (plantuml . t)
                                     (latex . t)
+                                    (js . t)
+                                    (perl .t)
                                     (makefile . t))))
 ;; Do not prompt to confirm evaluation
 (setq org-confirm-babel-evaluate nil)
@@ -874,25 +879,27 @@ run the right number of times.
               :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
               :recursive t
               :publishing-function org-publish-attachment)
-             ("project-support"
+             ("project-support-notes"
               :base-directory "~/org/ps/"
-              :publishing-directory "~/public_html"
+              :publishing-directory "/google/data/rw/users/wa/wattenbarger/www/public_html"
               :html-head "<link rel=\"stylesheet\"
                          href=\"css/worg.css\"
                          type=\"text/css\"/>"
               :base-extension "org"
               :recursive t
-              :publishing-function org-html-publish-to-html
+              :publishing-function (org-html-publish-to-html org-org-publish-to-org)
               :headline-levels 4
               :with-drawers t
               :html-html5-fancy t
               :auto-preamble t)
              ("project-support-static"
               :base-directory "~/org/ps/"
-              :publishing-directory "~/public_html"
+              :publishing-directory "/google/data/rw/users/wa/wattenbarger/www/public_html"
               :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
               :recursive t
-              :publishing-function org-publish-attachment)))
+              :publishing-function org-publish-attachment)
+             ("project-support" :components ("project-support-notes" "project-support-static"))
+             ))
 #+END_SRC
 
 *** Pomodoro
@@ -995,7 +1002,7 @@ to Cask.
                                     1 font-lock-warning-face t)))))
 
 (add-hook 'prog-mode-hook 'whitespace-mode)
-(add-hook 'prog-mode-hook 'idle-highlight-mode)
+;; (add-hook 'prog-mode-hook 'idle-highlight-mode)
 (add-hook 'prog-mode-hook 'hl-line-mode)
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
@@ -1142,3 +1149,124 @@ You might want to add these to your Cask:
 (key-chord-mode 1)
 #+END_SRC
 
+
+* Multi-term
+
+#+BEGIN_SRC emacs-lisp
+(require 'multi-term)
+#+END_SRC
+* Emux
+Emux setup.
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/subs/emux"))
+(require 'emux-base)
+(require 'emux-session)
+(setq emux-completing-read-command (quote ido-completing-read))
+(setq multi-term-program "/usr/local/bin/zsh")
+#+END_SRC
+
+** This is all from the emux README
+
+#+BEGIN_SRC emacs-lisp
+;; Tell term which keys you do not want to send to the underlying terminal:
+
+ '(term-unbind-key-list (quote ("C-z" "C-x" "C-c" "C-h" "C-l" "<ESC>")))
+
+;; Setup pretty terminal colors:
+
+  ;; '(ansi-term-color-vector [unspecified "white" "red" "green" "yellow"
+  ;; "royal blue" "magenta" "cyan" "white"] t)
+
+;; Set multi-term scolling behaviour:
+
+'(multi-term-scroll-show-maximum-output t)
+
+;; Set maximum buffer size (scrollback):
+
+'(term-buffer-maximum-size 16384)
+
+;; Set term default background and foreground:
+
+;; '(term-default-bg-color "#000000")
+;; '(term-default-fg-color "#AAAAAA")
+
+
+;; for some reason you need to have a fringe, or multi-term doesn't seem
+;; to scroll output correctly
+
+;; '(fringe-mode (quote (1 . 1)) nil (fringe))
+
+;; Bind some keys (below is what I use):
+
+(global-set-key (kbd "C-x c") '
+                emux-term-create)
+(global-set-key (kbd "C-x P") 'emux-session-load-template)
+
+(setq
+ term-bind-key-alist
+ '(("C-x c" . emux-term-create)
+   ("C-x r" . emux-term-rename)
+   ("C-x K" . emux-term-destroy)
+   ("C-x C" . emux-screen-create)
+   ("C-x R" . emux-screen-rename)
+   ("C-x s" . emux-screen-switch)
+   ("C-x M-s" . emux-jump-to-screen)
+   ("C-x S" . emux-session-switch)
+   ("C-x P" . emux-session-load-template)
+   ("C-x C-S-k" . emux-session-destroy)
+   ("C-x B" . emux-jump-to-buffer)
+   ("C-S-y" . emux-term-yank)
+   ("C-x -" . emux-term-vsplit)
+   ("C-x |" . emux-term-hsplit)
+   ("C-c C-c" . term-interrupt-subjob)
+   ("C-S-c" . term-interrupt-subjob)
+   ("C-S-p" . previous-line)
+   ("C-S-s" . isearch-forward)
+   ("C-S-r" . isearch-backward)
+   ("C-m" . term-send-raw)
+   ("M-f" . term-send-forward-word)
+   ("M-b" . term-send-backward-word)
+   ("M-o" . term-send-backspace)
+   ("M-d" . term-send-forward-kill-word)
+   ("M-DEL" . term-send-backward-kill-word)
+   ("M-," . term-send-input)
+   ("M-." . comint-dynamic-complete)))
+
+(define-key term-mode-map (kbd "C-S-l") 'emux-term-clear-screen)
+
+;; I like to make a new frame for emux, and switch between my normal
+;; Emacs stuff and my emux frame, it makes the context switching a little
+;; more apparent.  You can make a frame like this:
+
+;; (modify-frame-parameters (make-frame) (list (cons 'name "emux")))
+
+;; and then you can switch to it with:
+
+;; (select-frame-by-name "emux")
+#+END_SRC
+
+* Google
+If I'm loading my config at google, then I want to load the google
+libs.
+
+** TODO Make this conditional or fail silently
+#+BEGIN_SRC emacs-lisp
+(load-file "/usr/share/emacs/site-lisp/google/google.el")
+(require 'google)
+#+END_SRC
+
+** Google libs
+#+BEGIN_SRC emacs-lisp
+(require 'p4-google)                ;; g4-annotate, improves find-file-at-point
+(require 'compilation-colorization) ;; colorizes output of (i)grep
+(require 'rotate-clients)           ;; google-rotate-client
+(require 'rotate-among-files)       ;; google-rotate-among-files
+(require 'googlemenu)               ;; handy Google menu bar
+(require 'p4-files)                 ;; transparent support for Perforce filesystem
+(require 'google3)                  ;; magically set paths for compiling google3 code
+(require 'google3-build)            ;; support for blaze builds
+#+END_SRC
+** Grok
+#+BEGIN_SRC emacs-lisp
+(grok-init)
+#+END_SRC
