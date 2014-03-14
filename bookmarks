@@ -2,7 +2,22 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("saybrook"
+(("saybrook/gpn"
+ (filename . "~/org/ps/saybrook_data.org")
+ (front-context-string . "\n- 07080618\n*** ")
+ (rear-context-string . "18\n:END:\n*** GPN")
+ (position . 1316))
+("saybrook/mpns"
+ (filename . "~/org/ps/saybrook_data.org")
+ (front-context-string . "\n- 07070933\n- 07")
+ (rear-context-string . "80618\n*** MPN(s)")
+ (position . 1338))
+("shag.swaps"
+ (filename . "~/org/ps/saybrook_data.org")
+ (front-context-string . "\n+--------------")
+ (rear-context-string . "shag.swaps table")
+ (position . 1757))
+("saybrook"
  (filename . "~/org/ps/saybrook_data.org")
  (front-context-string . "\n* Notes\n** Sayb")
  (rear-context-string . "SUM %CLOCKSUM_T\n")
@@ -39,7 +54,7 @@
  (position . 813))
 ("org-capture-last-stored"
  (filename . "~/org/notes.org")
- (front-context-string . "* TODO Mess with")
- (rear-context-string . "f?referrer=4052\n")
- (position . 7903))
+ (front-context-string . "* TODO \n** I sho")
+ (rear-context-string . "rook_data.org]]\n")
+ (position . 336))
 )

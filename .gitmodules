@@ -16,3 +16,6 @@
 [submodule "subs/pretty-symbols"]
 	path = subs/pretty-symbols
 	url = https://github.com/drothlis/pretty-symbols.git
+[submodule "subs/emux"]
+	path = subs/emux
+	url = https://github.com/re5et/emux.git
