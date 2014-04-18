@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("DeeDoc"
+(("essentiallogic"
+ (filename . "~/git/pyprocmtp/simple.org")
+ (front-context-string . "\n\nThe essential ")
+ (rear-context-string . " Essential Logic")
+ (position . 28306))
+("DeeDoc"
  (front-context-string . "\nmakes Python re")
  (rear-context-string . "           \nDee\n")
  (position . 100)
@@ -46,9 +51,9 @@
  (position . 518))
 ("org-refile-last-stored"
  (filename . "~/org/someday-work.org")
- (front-context-string . "** NEXT Write a ")
- (rear-context-string . "s to s2f-client\n")
- (position . 1253))
+ (front-context-string . "** NEXT outline ")
+ (rear-context-string . " and new tables\n")
+ (position . 1830))
 ("org-capture-last-stored"
  (filename . "~/org/notes.org")
  (front-context-string . "* NOTE pandoc   ")
