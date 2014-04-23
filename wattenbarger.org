@@ -531,7 +531,7 @@ views which you can see later on.
   (setq org-directory "~/org")
   (setq org-default-notes-file (concat org-directory "/notes.org"))
   (setq org-default-ideas-file (concat org-directory "/ideas.org"))
-  (setq org-agenda-files '("~/org"))
+  (setq org-agenda-files '("~/org" "~/org/work/mtp.org"))
   (setq org-refile-targets '((nil :maxlevel . 2)
                              (org-agenda-files :maxlevel . 1)))
 #+END_SRC
@@ -662,7 +662,7 @@ considered for the agenda views.
                             ))
         ("A" "Agenda for everything"
           agenda "Everything"
-          ((org-agenda-files '("~/org" "~/org/personal"))
+          ((org-agenda-files '("~/org" "~/org/work"))
            ))))
 #+END_SRC
 
