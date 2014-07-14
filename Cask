@@ -33,7 +33,6 @@
 (depends-on "color-theme-solarized")
 (depends-on "multi-term")
 (depends-on "flatland-theme")
-(depends-on "grubber-darker-theme")
 (depends-on "github-theme")
 (depends-on "gruvbox-theme")
 (depends-on "heroku-theme")
@@ -52,3 +51,4 @@
 (depends-on "subatomic-theme")
 (depends-on "subatomic256-theme")
 (depends-on "sublime-themes")
+(depends-on "cider")
