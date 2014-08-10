@@ -587,6 +587,7 @@ lately. I'll comment it out for now.
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'org-mode-hook (lambda () (abbrev-mode t)))
+  (add-hook 'org-mode-hook (lambda () (smartparens-mode nil)))
   (add-hook 'org-mode-hook (lambda () (remove-hook 'before-save-hook 'whitespace-cleanup)))
   ;; (add-hook 'org-mode-hook 'auto-fill-mode)
   ;; (add-hook 'org-capture-mode-hook 'auto-fill-mode)
