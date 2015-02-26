@@ -531,7 +531,7 @@ views which you can see later on.
   (setq org-directory "~/org")
   (setq org-default-notes-file (concat org-directory "/notes.org"))
   (setq org-default-ideas-file (concat org-directory "/ideas.org"))
-  (setq org-agenda-files '("~/org"))
+  (setq org-agenda-files '("~/org" "~/org/work/mtp.org"))
   (setq org-refile-targets '((nil :maxlevel . 2)
                              (org-agenda-files :maxlevel . 1)))
 #+END_SRC
@@ -587,6 +587,7 @@ lately. I'll comment it out for now.
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'org-mode-hook (lambda () (abbrev-mode t)))
+  (add-hook 'org-mode-hook (lambda () (smartparens-mode nil)))
   (add-hook 'org-mode-hook (lambda () (remove-hook 'before-save-hook 'whitespace-cleanup)))
   ;; (add-hook 'org-mode-hook 'auto-fill-mode)
   ;; (add-hook 'org-capture-mode-hook 'auto-fill-mode)
@@ -662,7 +663,7 @@ considered for the agenda views.
                             ))
         ("A" "Agenda for everything"
           agenda "Everything"
-          ((org-agenda-files '("~/org" "~/org/personal"))
+          ((org-agenda-files '("~/org" "~/org/work"))
            ))))
 #+END_SRC
 
@@ -888,7 +889,7 @@ run the right number of times.
               :recursive t
               :publishing-function org-publish-attachment)
              ("project-support"
-              :base-directory "~/org/ps/"
+              :base-directory "~/org/work/"
               :publishing-directory "~/public_html"
               :html-head "<link rel=\"stylesheet\"
                          href=\"css/worg.css\"
@@ -901,7 +902,7 @@ run the right number of times.
               :html-html5-fancy t
               :auto-preamble t)
              ("project-support-static"
-              :base-directory "~/org/ps/"
+              :base-directory "~/org/work/"
               :publishing-directory "~/public_html"
               :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
               :recursive t
@@ -1076,11 +1077,78 @@ I'm using solarized more than base16 again lately. Add this to your Cask:
 Or run =M-x= =package-install= =solarized-theme=.
 
 #+BEGIN_SRC emacs-lisp
-(load-theme 'solarized-dark t)
+(defun sd ()
+  (interactive)
+  (unless (package-installed-p 'solarized-theme)
+    (package-install 'solarized-theme))
+  (load-theme 'solarized-dark t))
+(sd)
 #+END_SRC
 
 Try the base16 themes with =M-x= =load-theme= =base16-default=, etc.
 
+** Some themes from technomancy's config
+
+#+BEGIN_SRC emacs-lisp
+(defun zb ()
+  (interactive)
+  (unless (package-installed-p 'zenburn-theme)
+    (package-install 'zenburn-theme))
+  (load-theme 'zenburn)
+  (set-face-background 'vertical-border "black")
+  (set-face-foreground 'vertical-border "black")
+  (require 'hl-line)
+  (set-face-background 'hl-line "gray17")
+  (eval-after-load 'magit
+    '(progn (set-face-background 'magit-item-highlight "black")
+            (set-face-background 'diff-refine-change "grey10")))
+  (set-face-foreground 'eshell-prompt "turquoise"))
+
+(defun tw ()
+  (interactive)
+  (unless (package-installed-p 'twilight-theme)
+    (package-install 'twilight-theme))
+  (load-theme 'twilight)
+  (set-face-background 'vertical-border "black")
+  (set-face-foreground 'vertical-border "black")
+  (require 'hl-line)
+  (set-face-foreground 'eshell-prompt "turquoise1")
+  (eval-after-load 'magit
+    '(progn (set-face-background 'magit-item-highlight "black")
+            (set-face-background 'diff-refine-change "grey10")))
+  (set-face-background 'hl-line "black"))
+
+(defun mk ()
+  (interactive)
+  (unless (package-installed-p 'monokai-theme)
+    (package-install 'monokai-theme))
+  (load-theme 'monokai)
+  (set-face-background 'vertical-border "black")
+  (set-face-foreground 'vertical-border "black")
+  (require 'hl-line)
+  (set-face-foreground 'eshell-prompt "turquoise1")
+  (set-face-background 'hl-line "black")
+  (eval-after-load 'diff-mode
+    '(set-face-background 'diff-refine-change "gray18"))
+  (eval-after-load 'magit
+    '(set-face-background 'magit-item-highlight "black")))
+
+(defun db ()
+  (interactive)
+  (load-theme 'deeper-blue)
+  (set-face-background 'hl-line "dark slate gray")
+  (eval-after-load 'magit
+    '(progn (set-face-background 'magit-item-highlight "black"))))
+
+(defun bb ()
+  "Black for use with glasstty in -nw"
+  (interactive)
+  (set-face-background 'vertical-border "bright green")
+  (set-face-foreground 'vertical-border "bright green")
+  (set-face-background 'hl-line "black")
+  (eval-after-load 'magit
+    '(set-face-background 'magit-item-highlight "black")))
+#+END_SRC
 * Fonts
 I go through different fonts depending on my mood. Lately, I really
 like =Meslo= fonts. You probably don't have this installed by default.

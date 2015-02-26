@@ -52,4 +52,3 @@
 (depends-on "sublime-themes")
 (depends-on "cider")
 (depends-on "lua-mode")
-(depends-on "org-pomodoro")
