@@ -7,7 +7,7 @@
 - Add litconfig directory to load-path
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'load-path litconfig-dir)
-(load-theme 'wombat)
+;; (load-theme 'wombat)
 #+END_SRC
 
 * Customization File
@@ -252,8 +252,8 @@ I'm leaving this commented for now because I haven't pulled in
 org-pomodoro yet.
 Now, I'm adding it back in.
 #+BEGIN_SRC emacs-lisp
-(require 'org-pomodoro)
-(local-set-key "\C-co" 'org-pomodoro)
+;; (require 'org-pomodoro)
+;; (local-set-key "\C-co" 'org-pomodoro)
 #+END_SRC
 
 ** Org Directories and Special Files
@@ -663,8 +663,13 @@ You might want to add these to your Cask:
 (setq inferior-lisp-program "sbcl")
 #+END_SRC
 
+* Haskell
+#+BEGIN_SRC emacs-lisp
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+#+END_SRC
+
 * Perl
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'load-path "/home/wattenbarger/Emacs-PDE/lisp")
+(add-to-list 'load-path "~/.emacs.d/pde")
 (load "pde-load")
 #+END_SRC

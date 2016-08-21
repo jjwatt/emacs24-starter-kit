@@ -1,26 +1,38 @@
+
 * Look and feel
 
 ** Fonts
 
 I go back and forth between fonts. Right now, I like PragmataPro.
+Also fond of:
+- "Meslo LG S DZ"
 #+BEGIN_SRC emacs-lisp
 ;; (let ((f "Meslo LG S DZ")
 ;;       (size "12"))
 ;;   (when (member f (font-family-list))
 ;;     (set-face-attribute 'default nil :font (concat f "-" size))))
-(let ((f "PragmataPro")
-      (size "14"))
-  (when (member f (font-family-list))
-    (set-face-attribute 'default nil :font (concat f "-" size))))
+;; (let ((f "Tansym")
+;;        (size "15"))
+;;    (when (member f (font-family-list))
+;;      (set-face-attribute 'default nil :font (concat f "-" size))))
+;; (let ((f "PragmataPro")
+;;        (size "15"))
+;;    (when (member f (font-family-list))
+;;      (set-face-attribute 'default nil :font (concat f "-" size))))
+(let ((f "Envy Code R")
+       (size "14"))
+   (when (member f (font-family-list))
+     (set-face-attribute 'default nil :font (concat f "-" size))))
+
 #+END_SRC
 
 ** Whitespace Mode
 #+BEGIN_SRC emacs-lisp
 ;; whitespace
-(setq whitespace-style '(face tabs spaces trailing lines
-                              space-before-tab newline
-                              indentation empty space-after-tab
-                              space-mark tab-mark newline-mark))
+;; (setq whitespace-style '(face tabs spaces trailing lines
+;;                               space-before-tab newline
+;;                               indentation empty space-after-tab
+;;                               space-mark tab-mark newline-mark))
 
 #+END_SRC
 
@@ -28,6 +40,7 @@ I go back and forth between fonts. Right now, I like PragmataPro.
 I wander, but I always seem to go back to "solarized-dark."
 
 #+BEGIN_SRC emacs-lisp
+(setq x-underline-at-descent-line t)
 (load-theme 'solarized-dark t)
 #+END_SRC
 

@@ -5,15 +5,22 @@
 ;; This is the first thing to get loaded.
 ;;
 
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (defvar my-home (getenv "HOME"))
-;; (setenv "ORG_HOME" (expand-file-name ".emacs.d/src/org-mode" my-home))
+(setenv "ORG_HOME" (expand-file-name ".emacs.d/src/org-mode" my-home))
 
 ;; load Org-mode from source when the ORG_HOME environment variable is set
 ;; (when (getenv "ORG_HOME")
-;;   (let ((org-lisp-dir (expand-file-name "lisp" (getenv "ORG_HOME"))))
-;;     (when (file-directory-p org-lisp-dir)
-;;       (add-to-list 'load-path org-lisp-dir)
-;;       (require 'org))))
+(let ((org-lisp-dir (expand-file-name "lisp" (getenv "ORG_HOME"))))
+  (when (file-directory-p org-lisp-dir)
+    (add-to-list 'load-path org-lisp-dir)
+    (require 'org)))
 
 (when (getenv "ORG_HOME")
   (let* ((org-lisp-dir (expand-file-name "lisp" (getenv "ORG_HOME")))
@@ -30,8 +37,17 @@
 
 ;; instead of starter-kit, point at a directory containing any literate org
 ;; configurations.
-(setq litconfig-dir (convert-standard-filename "~/.emacs.d/litconf"))
-(mapc #'org-babel-load-file (directory-files litconfig-dir t "\\.org$"))
+(add-hook 'after-init-hook
+          '(lambda ()
+             (setq litconfig-dir
+                   (convert-standard-filename "~/.emacs.d/litconf"))
+             (mapc #'org-babel-load-file
+                   (directory-files litconfig-dir t "\\.org$"))))
+
+(setq litconfig-dir
+      (convert-standard-filename "~/.emacs.d/litconf"))
+(mapc #'org-babel-load-file
+      (directory-files litconfig-dir t "\\.org$"))
 
 ;; load the starter kit from the `after-init-hook' so all packages are loaded
 ;; (add-hook 'after-init-hook
